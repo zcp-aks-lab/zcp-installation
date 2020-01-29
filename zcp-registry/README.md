@@ -14,7 +14,7 @@ $ git clone https://github.com/cnpst/zcp-installation.git
 ### ENV 수정
 
 ```
-$ vi install_eks.sh
+$ vi install_iks.sh
 ```
 
 ```
@@ -38,16 +38,27 @@ $ ./install_iks.sh
 ```
 
 ## for AKS
+
+### ENV 수정
+
 ```
 $ vi values-aks.yaml
 
+...
+registry:
+  image:
+    repository: registry.au-syd.bluemix.net/cloudzcp/registry-photon
+  objectStorage:
+    azure:
+      accountname:  # CHANGE
+      accountkey:   # CHANGE
+      container:    # CHANGE
+...
 ```
 
 ```
 $ vi install_aks.sh
-```
 
-```
 # variables
 TARGET_NAMESPACE=zcp-system
 HARBOR_INGRESS_HOSTS=aks-dev-registry.cloudzcp.io   # Change

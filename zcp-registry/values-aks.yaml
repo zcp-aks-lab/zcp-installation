@@ -23,8 +23,6 @@ common:
             values:
             - management
 
-externalDomain: iks-dev-registry.cloudzcp.io   # CHANGE
-
 persistence:
   enabled: true
 
