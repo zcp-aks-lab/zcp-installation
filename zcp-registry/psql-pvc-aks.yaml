@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: zcp-registry-postgresql
+    chart: postgresql-0.9.1
+    heritage: Tiller
+    release: zcp-registry
+  name: zcp-registry-postgresql
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+  storageClassName: managed-standard-retain

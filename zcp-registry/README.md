@@ -72,6 +72,12 @@ HARBOR_BACKUP_S3_SECRETKEY=
 HARBOR_BACKUP_S3_BUCKET=
 ```
 
+### PVC 생성
+```
+$ kubectl create -f mysql-pvc-aks.yaml
+$ kubectl create -f psql-pvc-aks.yaml
+```
+
 ### Helm install 수행
 
 ```
