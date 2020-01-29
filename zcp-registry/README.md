@@ -14,7 +14,7 @@ $ git clone https://github.com/cnpst/zcp-installation.git
 ### ENV 수정
 
 ```
-$ vi install_iks.sh
+$ vi install_eks.sh
 ```
 
 ```
@@ -35,4 +35,34 @@ HARBOR_BACKUP_S3_BUCKET=
 
 ```
 $ ./install_iks.sh
+```
+
+## for AKS
+```
+$ vi values-aks.yaml
+
+```
+
+```
+$ vi install_aks.sh
+```
+
+```
+# variables
+TARGET_NAMESPACE=zcp-system
+HARBOR_INGRESS_HOSTS=aks-dev-registry.cloudzcp.io   # Change
+HARBOR_INGRESS_CONTROLLER=private-nginx
+HARBOR_ADMIN_PASSWORD=                        # Change
+HARBOR_S3_ACCESSKEY=
+HARBOR_S3_SECRETKEY=
+HARBOR_S3_BUCKET=
+HARBOR_BACKUP_S3_ACCESSKEY=
+HARBOR_BACKUP_S3_SECRETKEY=
+HARBOR_BACKUP_S3_BUCKET=
+```
+
+### Helm install 수행
+
+```
+$ ./install_aks.sh
 ```
