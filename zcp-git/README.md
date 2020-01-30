@@ -46,7 +46,7 @@ $ kubectl apply -f zcp-git-pvc-aks.yaml
 
 
 ### 1. values.yaml 정보 변경
-private 환경인 경우 values-ibm.yaml 을 수정한다. (AKS 인 경우 values-ibm.yaml)
+private 환경인 경우 values-ibm.yaml 을 수정한다. (AKS 인 경우 values-aks.yaml)
 `# CAHNGE` 주석이 포함된 라인의 정보를 수정한다.
 ```
 service:
