@@ -36,6 +36,9 @@ $ cd zcp-installation/zcp-git
 pvc를 설치한다.
 ```
 $ kubectl apply -f zcp-git-pvc.yaml
+
+# AKS 인 경우
+$ kubectl apply -f zcp-git-pvc-aks.yaml
 ```
 
 ## Deploy the application
@@ -43,7 +46,7 @@ $ kubectl apply -f zcp-git-pvc.yaml
 
 
 ### 1. values.yaml 정보 변경
-private 환경인 경우 values-ibm.yaml 을 수정한다.
+private 환경인 경우 values-ibm.yaml 을 수정한다. (AKS 인 경우 values-ibm.yaml)
 `# CAHNGE` 주석이 포함된 라인의 정보를 수정한다.
 ```
 service:
@@ -70,4 +73,9 @@ $ helm install gitea-0.6.0.tgz -n zcp-git -f values.yaml --namespace=zcp-system
 private 환경인 경우
 ```
 $ helm install gitea-0.6.0.tgz -n zcp-git -f values-ibm.yaml --namespace=zcp-system 
+```
+
+AKS 인 경우
+```
+$ helm install gitea-0.6.0.tgz -n zcp-git -f values-aks.yaml --namespace=zcp-system 
 ```

@@ -1,0 +1,81 @@
+## Override the name of the Chart.
+##
+# nameOverride:
+
+## Kubernetes configuration
+## For minikube, set this to NodePort, elsewhere use LoadBalancer
+##
+serviceType: ClusterIP
+service:
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: private-nginx
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+    hosts:
+      host: skn-ers-dev-git.cloudzcp.io  #CHANGE
+    tls:
+    - hosts:
+      - skn-ers-git-git.cloudzcp.io  # CHANGE
+      secretName: cloudzcp-io-cert
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: beta.kubernetes.io/arch
+          operator: In
+          values:
+          - "amd64"
+        - key: role
+          operator: In
+          values:
+          - "management"
+tolerations:
+- key: "management"
+  operator: "Equal"
+  value: "true"
+  effect: "NoSchedule"
+      
+## Persistent Volume Storage configuration.
+## ref: https://kubernetes.io/docs/user-guide/persistent-volumes
+##
+persistence:
+  ## Enable persistence using Persistent Volume Claims.
+  ##
+  enabled: true
+
+  existingClaim: zcp-gitea
+
+## Configuration values for the postgresql dependency.
+## ref: https://github.com/kubernetes/charts/blob/master/stable/postgresql/README.md
+##
+postgresql:
+
+  ## Persistent Volume Storage configuration.
+  ## ref: https://kubernetes.io/docs/user-guide/persistent-volumes
+  ##
+  persistence:
+    ## Enable PostgreSQL persistence using Persistent Volume Claims.
+    ##
+    enabled: true
+    existingClaim: zcp-gitea-postgres 
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: beta.kubernetes.io/arch
+            operator: In
+            values:
+            - "amd64"
+          - key: role
+            operator: In
+            values:
+            - "management"
+  tolerations:
+  - key: "management"
+    operator: "Equal"
+    value: "true"
+    effect: "NoSchedule"
