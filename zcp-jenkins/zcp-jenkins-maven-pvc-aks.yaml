@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: zcp-jenkins-mvn-repo
+  namespace: zcp-system
+  annotations:
+    volume.beta.kubernetes.io/storage-class: file-standard-retain
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 20Gi
+  storageClassName: file-standard-retain

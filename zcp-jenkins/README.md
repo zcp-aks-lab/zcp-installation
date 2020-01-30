@@ -36,11 +36,15 @@ $ cd zcp-installation/zcp-jenkins
 Jenkins home pvc를 설치한다.
 ```
 $ kubectl apply -f zcp-jenkins-pvc.yaml
+# AKS 인 경우
+$ kubectl apply -f zcp-jenkins-pvc-aks.yaml
 ```
 
 Maven local repository pvc를 설치한다.
 ```
 $ kubectl apply -f zcp-jenkins-maven-pvc.yaml
+# AKS 인 경우 
+$ kubectl apply -f zcp-jenkins-maven-pvc-aks.yaml
 ```
 
 ## Deploy the application
@@ -48,7 +52,7 @@ $ kubectl apply -f zcp-jenkins-maven-pvc.yaml
 
 
 ### 1. values.yaml 정보 변경
-private 환경인 경우 values-ibm.yaml 을 수정한다.
+private 환경인 경우 values-ibm.yaml(AKS 는 values-aks.yaml) 을 수정한다.
 `# CAHNGE` 주석이 포함된 라인의 정보를 수정한다.
 ```
 Master:
@@ -60,13 +64,12 @@ Master:
 Master:
   Ingress:
     Annotations:
-      # ingress.bluemix.net/ALB-ID: private-xxxx-alb1  # CHANGE: Private ALB
+      # ingress.bluemix.net/ALB-ID: private-xxxx-alb1  # CHANGE: Private ALB (IKS 인 경우만 수정한다.)
     TLS:
     - hosts:
       - jenkins.cloudzcp.io  # CHANGE
     
 ...
-
 
 ```
 
@@ -79,6 +82,10 @@ $ helm install jenkins-0.14.3.tgz -n zcp-jenkins -f values.yaml --namespace=zcp-
 private 환경인 경우
 ```
 $ helm install jenkins-0.14.3.tgz -n zcp-jenkins -f values-ibm.yaml --namespace=zcp-system 
+```
+AKS 인 경우
+```
+$ helm install jenkins-0.14.3.tgz -n zcp-jenkins -f values-aks.yaml --namespace=zcp-system 
 ```
 
 ### 3. Jenkins Plugins 복사
